@@ -5,8 +5,8 @@
 
 from machine import I2C, Pin
 from ds1307 import DS1307
-from ssd1306 import SSD1306_I2C
-import framebuf
+#from ssd1306 import SSD1306_I2C
+#import framebuf
 import time
 import utime
 
@@ -17,19 +17,18 @@ rtc=DS1307(rtc_i2c)
 # ======================================
 # Base setup for the SSD1306
 # ======================================
-# Set the Width of the OLED Display
-WIDTH = 128
+## Set the Width of the OLED Display
+#WIDTH = 128
 # Set the Height of the OLED Display
-HEIGHT = 32
-oled_i2c = I2C(1)
-oled = SSD1306_I2C(WIDTH, HEIGHT, oled_i2c)
-oled.text("Starting up!", 5,8)
-oled.show()
+#HEIGHT = 32
+#oled_i2c = I2C(1)
+#oled = SSD1306_I2C(WIDTH, HEIGHT, oled_i2c)
+#oled.text("Starting up!", 5,8)
+#oled.show()
 # ======================================
 
 
 def ConvertDT(d,which):
-    #dtin=rtc.datetime()
     dtin=d
     year=dtin[0]
     month=dtin[1]
@@ -37,7 +36,6 @@ def ConvertDT(d,which):
         monS=f"{month:02d}"
     else:
         monS=str(month)
-    
     day=dtin[2]
     if day<10:
         dayS=f"{day:02d}"
@@ -89,32 +87,6 @@ def ConvertDT(d,which):
 # ======================================
 # Start running
 # ======================================
-# print(rtc.datetime())
-# rtcdt=rtc.datetime()
-# print(rtcdt[0])
-# if rtcdt[0]==2023:
-#     print("RTC needs to be set")
-#     now=time.localtime()
-#     print(now)
-#     nowdat=(now[0],now[1],now[2],now[6],now[3],now[4],now[5])
-# 
-#     rtc.datetime(nowdat)
-#     
-# rtcdt=rtc.datetime()
-# print(rtcdt)
-# ltdt=time.localtime()
-# print(ltdt)
-# #print("RTC: %s" % rtcdt)
-# # print("Pico: %s" % ltdt)
-# loop=True
-# while loop:
-#     oled.fill(0)
-#     currentTime = f"{ltdt[3]}:{ltdt[4]}:{ltdt[5]}"
-#     #print(f"{ltdt[3]}:{ltdt[4]}:{ltdt[5]}")
-#     oled.text(currentTime, 5,8)
-#     oled.show()    
-#     time.sleep(1)
-#     ltdt=time.localtime()
 
 rtc=machine.RTC()
 dt=rtc.datetime()
@@ -127,12 +99,12 @@ d,t=ConvertDT(dt,1)
 print(f"Local Time: {d} - {t}")
 loop=True
 while loop:
-    oled.fill(0)
+    #oled.fill(0)
     #dt=time.localtime()
     #print(dt)
     d,t=ConvertDT(time.localtime(),1)
     print(f"Local Time: {d} - {t}")
     #time.sleep(1)
-    oled.text(t, 5,8)
-    oled.show()    
+    #oled.text(t, 5,8)
+    #oled.show()    
     time.sleep(1)
